@@ -35,15 +35,16 @@ void PrintMatrix(int[,] matrix)
 
 int[,] MatrixMultiplication(int[,] matrix1, int[,] matrix2)
 {
-    int[,] result = new int[matrix1.GetLength(0), matrix1.GetLength(1)];
+    int[,] result = new int[matrix1.GetLength(0), matrix2.GetLength(1)];
 
     for (int i = 0; i < matrix1.GetLength(0); i++)
     {
-        for (int j = 0; j < matrix1.GetLength(1); j++)
+        for (int j = 0; j < matrix2.GetLength(1); j++)
         {
-            for (int k = 0; k < matrix1.GetLength(0); k++)
+            result[i,j] = 0;
+            for (int k = 0; k < matrix1.GetLength(1); k++)
             {
-                result[i, j] = result[i, j] + matrix1[k, j] * matrix2[i, k];
+                result[i, j] = result[i, j] + matrix2[k, j] * matrix1[i, k];
             }
         }
     }
@@ -70,14 +71,14 @@ while (rowsFirstMatrix <= 0 || columnsFirstMatrix <= 0
     columnsSecondMatrix = Convert.ToInt32(Console.ReadLine());
 }
 
-int[,] matrixNumber1 = CreateMatrixRndInt(rowsFirstMatrix, columnsFirstMatrix, 1, 9);
-int[,] matrixNumber2 = CreateMatrixRndInt(rowsSecondMatrix, columnsSecondMatrix, 1, 9);
+int[,] matrixNumber1 = CreateMatrixRndInt(rowsFirstMatrix, columnsFirstMatrix, 1, 4);
+int[,] matrixNumber2 = CreateMatrixRndInt(rowsSecondMatrix, columnsSecondMatrix, 1, 4);
 PrintMatrix(matrixNumber1);
 Console.WriteLine();
 PrintMatrix(matrixNumber2);
 Console.WriteLine();
 
-if (rowsFirstMatrix != columnsSecondMatrix || columnsFirstMatrix != rowsSecondMatrix)
+if (columnsFirstMatrix != rowsSecondMatrix)
 {
     Console.WriteLine("Матрицы умножить невозможно.");
 }
